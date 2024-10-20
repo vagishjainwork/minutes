@@ -1,6 +1,6 @@
 # Minutes App
 
-Make sure you do `npm i` before running start command mentioned in the packahe.json
+Make sure you do `npm i` before running start command mentioned in the package.json
 
 You can preview the changes directly on your phone or tablet by scanning the **QR code**.
 
