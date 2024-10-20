@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import CartContext from '../context/CartContext';
 import StarshipCard from '../components/StarshipCard';
 import CartButton from '../components/CartButton';
@@ -14,13 +14,11 @@ const fetchStarships = async ({ url = `https://swapi.dev/api/starships/?page=1` 
 const HomeScreen = () => {
   const { cart } = useContext(CartContext);
 
-  const { data, isFetching, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
-    'starships', 
-    fetchStarships, 
-    {
-      getNextPageParam: (lastPage) => lastPage.next
-    }
-  );
+  const { data, isFetching, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['starships'],
+    queryFn: fetchStarships,
+    getNextPageParam: (lastPage) => lastPage.next
+  });
 
   const cartCount = useMemo(() => cart?.reduce((acc, curr) => acc + curr?.quantity, 0) ?? 0, [cart]);
 

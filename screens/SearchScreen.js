@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useContext, useCallback } from 'react';
 import { View, TextInput, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import debounce from 'lodash.debounce';
 import axios from 'axios';
 import StarshipCard from '../components/StarshipCard';
@@ -16,7 +16,9 @@ const SearchScreen = () => {
   const { cart } = useContext(CartContext);
   const [query, setQuery] = useState('');
 
-  const { data, isLoading } = useQuery(['searchResults', query], () => fetchSearchResults(query), {
+  const { data, isLoading } = useQuery({
+    queryKey: ['searchResults', query],
+    queryFn: () => fetchSearchResults(query),
     enabled: !!query,
   });
 
