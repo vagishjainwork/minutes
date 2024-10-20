@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const fetchStarships = async ({ url = `https://swapi.dev/api/starships/?page=1` }) => {
   const response = await axios.get(url);
-  console.log("response: ", response.data);
   return response.data;
 };
 
