@@ -50,6 +50,7 @@ const HomeScreen = () => {
         onEndReachedThreshold={0.5}
         showsVerticalScrollIndicator={false}
         ListFooterComponent={isFetchingNextPage ? <ActivityIndicator size="small" color="#007BFF" /> : null}
+        ListFooterComponentStyle={styles.listFooterComponentStyle}
       />
       <CartButton itemCount={cartCount} />
     </View>
@@ -67,6 +68,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  listFooterComponentStyle: {
+    marginBottom: 12
+  }
 });
 
 export default HomeScreen;
