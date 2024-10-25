@@ -10,7 +10,7 @@ const StarshipCard = ({starshipData}) => {
 
   const cost = useMemo(() => cost_in_credits / 10000, [cost_in_credits]);
   const image = useMemo(() => `https://picsum.photos/id/${url.split('/').at(-2)}/200/300`, [url]);
-  const cartItem = useMemo(() => cart.find((item) => item.url === url), [cart, url]);
+  const cartItem = useMemo(() => cart.find((item) => item.name === name), [cart, name]);
   const count = useMemo(() => cartItem ? cartItem.quantity : 0, [cartItem]);
   const isInvalidCost = useMemo(() => Number.isNaN(cost), [cost]);
   const cartText = useMemo(() => isInvalidCost ? 'Unavailable' : 'Add to Cart', [isInvalidCost]);
