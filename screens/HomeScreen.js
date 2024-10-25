@@ -6,8 +6,8 @@ import StarshipCard from '../components/StarshipCard';
 import CartButton from '../components/CartButton';
 import axios from 'axios';
 
-const fetchStarships = async ({ url = `https://swapi.dev/api/starships/?page=1` }) => {
-  const response = await axios.get(url);
+const fetchStarships = async ({ pageParam = `https://swapi.dev/api/starships/?page=1` }) => {
+  const response = await axios.get(pageParam);
   return response.data;
 };
 
