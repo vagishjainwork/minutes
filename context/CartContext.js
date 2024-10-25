@@ -7,10 +7,10 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (starship) => {
     setCart((prevCart) => {
-      const item = prevCart.find((item) => item.name === starship.name);
+      const item = prevCart.find((item) => item.url === starship.url);
       if (item) {
         return prevCart.map((item) =>
-          item.name === starship.name
+          item.url === starship.url
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -22,12 +22,12 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (name) => {
     setCart((prevCart) => {
-      const item = prevCart.find((item) => item.name === name);
+      const item = prevCart.find((item) => item.url === name);
       if (item.quantity === 1) {
-        return prevCart.filter((item) => item.name !== name);
+        return prevCart.filter((item) => item.url !== name);
       } else {
         return prevCart.map((item) =>
-          item.name === name ? { ...item, quantity: item.quantity - 1 } : item
+          item.url === name ? { ...item, quantity: item.quantity - 1 } : item
         );
       }
     });
