@@ -4,19 +4,22 @@ import CartContext from '../context/CartContext';
 import { Ionicons } from '@expo/vector-icons';
 import { MAX_CART_QUANTITY_PER_ITEM } from '../constants';
 
-const StarshipCard = ({ image, name, cost, model }) => {
+const StarshipCard = ({starshipData}) => {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { name, model, url, cost_in_credits } = starshipData;
 
-  const cartItem = useMemo(() => cart.find((item) => item.name === name), [cart, name]);
+  const cost = useMemo(() => cost_in_credits / 10000, [cost_in_credits]);
+  const image = useMemo(() => `https://picsum.photos/id/${url.split('/').at(-2)}/200/300`, [url]);
+  const cartItem = useMemo(() => cart.find((item) => item.url === url), [cart, url]);
   const count = useMemo(() => cartItem ? cartItem.quantity : 0, [cartItem]);
   const isInvalidCost = useMemo(() => Number.isNaN(cost), [cost]);
   const cartText = useMemo(() => isInvalidCost ? 'Unavailable' : 'Add to Cart', [isInvalidCost]);
 
   const handleIncrement = useCallback(() => {
     if (count < MAX_CART_QUANTITY_PER_ITEM) {
-      addToCart({ name, cost });
+      addToCart({...starshipData, cost});
     }
-  }, [count, addToCart, name, cost]);
+  }, [count, addToCart, starshipData, cost]);
 
   const handleDecrement = useCallback(() => {
     if (count > 0) {
