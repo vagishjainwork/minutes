@@ -29,10 +29,7 @@ const SearchScreen = () => {
   const renderStarship = useCallback(({ item, index }) => (
     <StarshipCard
       key={`${item.url}${index}`}
-      image={`https://picsum.photos/id/${index}/200/300`}
-      name={item.name}
-      cost={item.cost_in_credits / 10000}
-      model={item.model}
+      starshipData={item}
     />
   ), []);
 
